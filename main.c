@@ -1,5 +1,7 @@
 #include "stdio.h"
 #include "math.h"
+#include "stdlib.h"
+#include "memory.h"
 
 //http://math.stackexchange.com/questions/69544/create-polynomial-coefficients-from-its-roots
 //http://stackoverflow.com/questions/21236788/efficient-calculation-of-polynomial-coefficients-from-its-roots
