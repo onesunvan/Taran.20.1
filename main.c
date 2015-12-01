@@ -3,12 +3,14 @@
 #include "stdlib.h"
 #include "memory.h"
 
+#define zerofyArray(array, size) (memset(array, 0, size))
+
 //http://math.stackexchange.com/questions/69544/create-polynomial-coefficients-from-its-roots
 //http://stackoverflow.com/questions/21236788/efficient-calculation-of-polynomial-coefficients-from-its-roots
 double * findCoefficients(double* roots, size_t size) {
 	size_t sizeBytes = sizeof(double) * (size + 1);
 	double * coefficients = malloc(sizeBytes);
-	memset(coefficients, 0, sizeBytes);
+	zerofyArray(coefficients, sizeBytes);
 
 	//first iteration
 	*coefficients = -*roots;
@@ -36,13 +38,16 @@ double * findCoefficients(double* roots, size_t size) {
 
 
 #define N 4
+#define printDecimal(number) (printf("%f, ", number))
+#define scanDecimal(number) (scanf("%lf", number))
+
 
 int main(void) {
 	double roots[N] = {3., 2., 1., -3.};
 	double * coefficients = findCoefficients(roots, N);
 	int i;
 	for (i = 0; i < N + 1; i++) {
-		printf("%f, ", coefficients[i]);
+		printDecimal(coefficients[i]);
 	}
 	printf("\n");
 	return 0;
