@@ -11,8 +11,8 @@ double * findCoefficients(double* roots, size_t size) {
 	memset(coefficients, 0, sizeBytes);
 
 	//first iteration
-	coefficients[0] = -roots[0];
-	coefficients[1] = 1.;
+	*coefficients = -*roots;
+	*(coefficients + 1) = 1.;
 
 	double * oldCoefficients = malloc(sizeBytes);
 	int i;
@@ -20,14 +20,14 @@ double * findCoefficients(double* roots, size_t size) {
 	for (i = 1; i < size; i++) {
 		memcpy(oldCoefficients, coefficients, sizeof(double) * (i + 1));
 		for (j = i; j >= 0; j--) {
-			coefficients[j + 1] = coefficients[j];
+			*(coefficients + j + 1) = *(coefficients + j);
 		}
-		coefficients[0] = 0.;
+		*coefficients = 0.;
 		for (j = 0; j <= i; j++) {
-			oldCoefficients[j] = oldCoefficients[j] * roots[i];
+			*(oldCoefficients + j) = *(oldCoefficients + j) * *(roots + i);
 		}
 		for (j = 0; j <= i; j++) {
-			coefficients[j] = coefficients[j] - oldCoefficients[j];
+			*(coefficients + j) = *(coefficients + j) - *(oldCoefficients + j);
 		}
 	}
 	free(oldCoefficients);
